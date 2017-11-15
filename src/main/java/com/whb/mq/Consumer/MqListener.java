@@ -1,4 +1,4 @@
-package com.whb.mq.consumber;
+package com.whb.mq.Consumer;
 
 import javax.annotation.PostConstruct;
 import javax.jms.JMSException;
