@@ -1,0 +1,123 @@
+一、从客户端发送消息至broker有sync（同步）和async（异步）两种方式。对于producer
+	来说，采用async方式会极大提高系统性能。 按照JMS规范，当在事务外发送持久化消息的时候，
+	ActiveMQ会强制使用同步发送方式。在这种情况下，每一次发送都是同步的，而且阻塞到收到broker的应答。
+	这个应答保证了broker已经成功地将消息持久化，而且不会丢失。但是这样作也严重地影响了性能。
+	同步异步两种实现代码   
+	 异步实现代码： 
+	1. cf = new ActiveMQConnectionFactory("tcp://locahost:61616?jms.useAsyncSend=true");     
+	2. ((ActiveMQConnectionFactory)connectionFactory).setUseAsyncSend(true);     
+	3. ((ActiveMQConnection)connection).setUseAsyncSend(true);    
+	同步实现代码： 
+	1. cf = new ActiveMQConnectionFactory("tcp://locahost:61616?jms.useAsyncSend=true");    
+	2. ((ActiveMQConnectionFactory)connectionFactory).setUseAsyncSend(true);    
+	3. ((ActiveMQConnection)connection).setUseAsyncSend(true); 
+
+二、session事物 
+   	createSession(false, Session.AUTO_ACKNOWLEDGE); 
+  	在connection创建session的时候，第一个参数决定session事物是否开启，true时session事物开启。为false时 ，session事物关闭。
+	Session.AUTO-ACKNOWLEDGE,session负责发送过去消息，收到自动确认。
+	Session.CLIENT-ACKNOWLEDGE(接收端确认接收到这条消息，调用这条消息的确认方法)。
+	session.DUPS_OK_ACKNOWLEDGE（懒散的确认方法，这种确认方法有可能传递的一些复制信息会出错）。 
+	
+三、 JMSDeliveryMode传送模式 
+	传送模式，有两种模式： PERSISTENT（持久化） 和 NON_PERSISTENT（非持久化），
+	PERSISTENT 表示该消息一定要被送到目的地，否则会导致应用错误，一般默认是该模式。 
+	NON_PERSISTENT 表示偶然丢失该消息是被允许的，这两种模式使开发者可以在消息传送的可靠性和吞吐量之间找到平衡点。
+	
+四、JMSExpiration 
+	消息过期时间，等于 Destination 的 send 方法中的 timeToLive 值加上发送时刻的 GMT 时间值。
+	如果 timeToLive值等于零，则 JMSExpiration 被设为零，表示该消息永不过期。如果发送后，在消息过期时间之后消息还没有被发送到目的地，则该消息被清除。 
+	例下：    producer.timeToLive(ms);括号内为消息存活时间。
+	
+五、JMSPriority 
+	消息优先级，从 0-9 十个级别，0-4 是普通消息， 5-9 是加急消息。JMS 不要求 JMS Provider 严格按照这十个优先级发送消息,但必须保证加急消息要先于普通消息到达。  
+	例下： producer. SetPriority(9); 
+
+六、JMSTimestamp 
+ 	从一条消息→JMS Provider→消息发出所用的时间。 
+
+七、JMSReplyTo  
+	提供本消息回复消息的目的地址
+	
+八、Subscription 
+	订阅 消息订阅分为非持久订阅(non-durable subscription)和持久订阅(durable subscrip-tion)，非持久订阅只有当客户端处于激活状态，
+	也就是和 JMS Provider 保持连接状态才能收到发送到某个主题的消息，而当客户端处于离线状态，这个时间段发到主题的消息将会丢失，永远不会收到。
+	持久订阅时，客户端向 JMS 注册一个识别自己身份的 ID，当这个客户端处于离线时，JMS Provider 会为这个 ID 保存所有发送到主题的消息，
+	当客户再次连接到 JMS Provider时，会根据自己的 ID 得到所有当自己处于离线时发送到主题的消息。
+
+九、发送到JMS Provider上的消息接收方式：   
+	a) Synchronously同步：subscriber或receiver可以通过调用receive方法实时地从destination上提取message。（接收端当message！==null的时候调用receiver（）方法来实现消息接收）
+	Receive方法在收到一个 message后结束，或当message 在一定的时间限制内没有收到时超时结束。 
+	b) Asynchronously异步（当消息到达主动通知消息接收端）：客户可以为某一个使用者注册一个message listener。message listener和event listener很相似。
+	当一个message到达了destination, JMS provider通过调用listener的onMessage方法将message传递过去，由onMessage方法负责处理message。
+	业务写在Onmessage（）方法体中。  
+	异步传输的优势：接收者不需要因为担心消息的丢失而一直和队列一直保持激活的状态。
+
+十、JMSRedelivered  
+    表示该消息曾经被收到但没有被签收。
+
+十一、MessageSelectors  
+	消息过滤器，如果你的消息应用程序需要过滤收到的messages, 可以用JMS API中的message selector来让message consumer定义它所感兴趣的messages。
+	Message selectors负责过滤掉JMS provider的message，而不是到应用程序的。message selector是一个含有表达式的字符串。
+	表达式的语法是SQL92 conditional expression syntax的一个子集。
+	当创建message consumer时， createReceiver, createSubscriber, 和createDurableSubscriber方法都可以定义某个message selector作为参数。
+	message consumer只接收headers和properties与selector匹配的messages。message selector不能根据message body的内容进行选择。
+	设置对应的条件来选择接收Producer发送到JMS Provider的消息，其他消息抛弃。
+
+十二、JMS连接池概念  
+	JMS 连接池  
+	总的来说，连接池是一个到 JMS 提供程序的空闲连接池。JMS 包含连接工厂概念，可以使用连接工厂创建到 JMS 提供程序的连接。
+	WebSphere Application Server 对连接工厂可以创建的连接数有一个限制，该限制由连接工厂的最大连接属性指定。
+	此属性的缺省值为 10，这意味着从连接工厂一次最多只能创建 10 个连接。  
+	每个工厂都有一个关联的空闲连接池。在应用服务器启动时，连接池是空的。一个工厂的空闲池中可以存在的最大连接数也由最大连接属性指定。
+	图 1 显示了定义有三个 JMS 连接工厂的应用服务器上的 JMS 连接池。
+	Failover后跟的参数说明： 
+	initialReconnectDelay    10 			How long to wait before the first reconnect attempt (in ms) 
+	maxReconnectDelay 		 30000 			The maximum amount of time we ever wait between reconnect attempts (in ms) 
+	useExponentialBackOff 	 true 			Should an exponential backoff be used between
+
+
+十三、消息优先级
+在发送时，可以为消息指定优先级，以期高优先级的消息能更快的递送给consumer。在javax.jms.Message#getJMSPriority()方法，有如下的说明：
+JMS API为消息定义了10个优先级，0最低，9最高。0-4作为一般的优先级，5-9作为加速优先级。JMS API不要求实现者能够严格按照消息的优先级的顺序把消息递送给consumer，
+但是应该尽量的实现加速优先级的消息能在一般优先级的消息的前面，递送给consumer。
+下面是JmsTemplate中的API：
+Class org.springframework.jms.core.JmsTemplate
+public void setPriority(int priority)
+为将要发送的消息设置优先级。
+public int getPriority()
+获取优先级
+
+
+十四、服务质量开关
+如果不打开服务质量的开关，消息的递送模式、优先级和存活时间的设置就没有作用。
+Class org.springframework.jms.core.JmsTemplate
+public void setExplicitQosEnabled(boolean explicitQosEnabled)
+发送消息的时候，是否使用QOS的值（deliveryMode, priority, timeToLive）
+public boolean isExplicitQosEnabled()
+如果是true，deliveryMode, priority, 和 timeToLive的值将被使用；否则使用默认的值。
+P.S.
+在JMS API中，消息的递送模式、优先级和存活时间可以在发送的时候统一设置：
+javax.jms.MessageProducer#send(Message message, int deliveryMode, int priority, long timeToLive):void
+
+十五、接收等待时间
+JmsTemplate的接收是阻塞式的接收，默认会一直阻塞等待，直到接收到了消息。也可以设置一个最长的等待时间参数，超过这个时间，接收的方法将得到null的结果。
+Class org.springframework.jms.core.JmsTemplate
+public void setReceiveTimeout(long receiveTimeout)
+设置接收等待时间，毫秒单位
+public long getReceiveTimeout()
+获取接收等待时间，毫秒单位
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
