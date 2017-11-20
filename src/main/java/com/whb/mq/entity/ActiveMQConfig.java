@@ -79,6 +79,10 @@ public class ActiveMQConfig {
 	 * 接收等待时间
 	 */
 	private long receiveTimeout = AbstractPollingMessageListenerContainer.DEFAULT_RECEIVE_TIMEOUT;
+	/**
+	 * 设置最大重发次数,一般默认是6次，实际工作中建议将这个上限值设置为3
+	 */
+	private int maximumRedeliveries = 3;
 
 	public int getSessionCacheSize() {
 		return this.sessionCacheSize;
@@ -198,5 +202,13 @@ public class ActiveMQConfig {
 
 	public void setReceiveTimeout(long receiveTimeout) {
 		this.receiveTimeout = receiveTimeout;
+	}
+
+	public int getMaximumRedeliveries() {
+		return maximumRedeliveries;
+	}
+
+	public void setMaximumRedeliveries(int maximumRedeliveries) {
+		this.maximumRedeliveries = maximumRedeliveries;
 	}
 }

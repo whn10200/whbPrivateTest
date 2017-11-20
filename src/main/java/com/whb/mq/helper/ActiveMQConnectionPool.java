@@ -38,7 +38,9 @@ public class ActiveMQConnectionPool {
 			factory = new ActiveMQConnectionFactory(config.getUserName(), config.getPassword(), config.getBrokerUrl());
 		}
 		factory.setClientIDPrefix(config.getClientIDPrefix());
-
+		// 设置最大重发次数,实际工作中建议将这个上限值设置为3
+		factory.getRedeliveryPolicy().setMaximumRedeliveries(config.getMaximumRedeliveries());
+		
 		cachingConnectionFactory = new CachingConnectionFactory(factory);
 		cachingConnectionFactory.setSessionCacheSize(config.getSessionCacheSize());
 
