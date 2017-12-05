@@ -5,9 +5,9 @@ import java.util.List;
 import org.assertj.core.util.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
@@ -23,6 +23,8 @@ public class FluentIterableTest {
         Student u4 = new Student(23, "keke");
 
         studentList = Lists.newArrayList(u1, u2, u3, u4);
+        
+        
 	}
 
 	@Test
@@ -48,15 +50,19 @@ public class FluentIterableTest {
         /**
          * 转换集合类型   ,把list中的user对象转换为String
          */
-        FluentIterable<String> transform = FluentIterable.from(studentList).transform(new Function<Student, String>() {
+        List<Student> transform = (List<Student>)FluentIterable.from(studentList).transform(new Function<Student, Student>() {
             @Override
-            public String apply(Student input) {
-                return Joiner.on("==").join(input.getAge(), input.getName());
+            public Student apply(Student input) {
+                //return Joiner.on("==").join(input.getAge(), input.getName());
+            	Student u1 = new Student();
+            	BeanUtils.copyProperties(input, u1);
+            	return u1;
             }
-        });
+        }).toList(); 
+        
         //打印结果
-        for (String s : transform) {
-            System.out.println(s);
+        for (Student s : transform) {
+            System.out.println(s.toString());
         }
     }
 	

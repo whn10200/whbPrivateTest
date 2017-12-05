@@ -11,7 +11,7 @@ public class Password {
 		
 //		setInfo(phoneList,salesmanIdList);
 
-		phoneList.add("884877");salesmanIdList.add("002072");
+		phoneList.add("123456");salesmanIdList.add("002072");
 		
 		for (int i = 0; i < phoneList.size(); i++) {
 			String password = SHA256.encrypt(phoneList.get(i));
