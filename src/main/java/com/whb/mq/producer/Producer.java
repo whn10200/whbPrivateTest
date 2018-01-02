@@ -17,7 +17,7 @@ import com.whb.mq.helper.ActiveMqHelper;
 public class Producer {
 
 	
-	@Resource(name="jmsQueueTemplate")
+	@Resource   //(name="jmsQueueTemplate")
     private JmsTemplate jmsTemplate;
 
     /**

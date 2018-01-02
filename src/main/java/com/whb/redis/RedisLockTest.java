@@ -27,7 +27,7 @@ public class RedisLockTest {
 
 	
 	@Test
-	public void test() {
+	public void stringRedisTemplateTest() {
 		 String redisValue = stringRedisTemplate.opsForValue().get(String.valueOf("LOAN_AUDIT_"));
 
          if(StringUtils.isBlank(redisValue)){

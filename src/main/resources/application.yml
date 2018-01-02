@@ -1,5 +1,5 @@
 server:
-  port: 10002
+  port: 10009
 logging:
   config: classpath:logback-spring.xml
   path: /mnt/tuodao_api/cloud-manage-api/log
