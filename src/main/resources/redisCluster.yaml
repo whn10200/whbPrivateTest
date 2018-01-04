@@ -1,0 +1,9 @@
+redis:
+ maxWaitMillis: -1
+ maxTotal: 20
+ minIdle: 1
+ maxIdle: 5
+ keyExpiredTime: 300	
+ address:
+  - 192.168.61.140:6379
+  - 192.168.61.140:6380

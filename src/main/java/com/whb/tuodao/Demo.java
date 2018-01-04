@@ -32,6 +32,11 @@ public class Demo implements Serializable {
      * 开户银行
      */
     private String bankAccountId;
+    
+    /**
+     * 个人手机号码
+     */
+    private String phone;
 
     /**
      * 银行预留手机号码
@@ -89,6 +94,14 @@ public class Demo implements Serializable {
 
 	public void setOperationType(Integer operationType) {
 		this.operationType = operationType;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
