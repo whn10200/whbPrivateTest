@@ -32,14 +32,14 @@ public class HttpUtil {
 	private static final String ALGORITHM = "HmacSHA1";
 	
     private static final  RestTemplate httpRestTemplate = new RestTemplate();
+    
+    protected static HttpHeaders headers = new HttpHeaders();
 
 	public static <T> String doService(String url, String action,String accessKey, ContentType type, T content) throws Exception{
 		String requestUrl = url + "/" +action + "." + type.name().toLowerCase();
-		HttpHeaders headers = new HttpHeaders();
-
         // 转换成指定类型
 		String requestBody = content(action, content, type);
-        headers.set("format", type.name().toLowerCase());
+		headers.set("format", type.name().toLowerCase());
 
 		log.info(requestBody);
 		try{
@@ -78,7 +78,6 @@ public class HttpUtil {
         try {
 
             ReqObject<T> obj = new ReqObject<T>();
-            HttpHeaders headers = new HttpHeaders();
             obj.setContent(content);
             ReqCommon common  = new ReqCommon();
             common.setAction(action);

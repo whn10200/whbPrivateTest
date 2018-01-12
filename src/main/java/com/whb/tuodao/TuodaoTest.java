@@ -44,11 +44,11 @@ public class TuodaoTest {
 		
 		Demo input = new Demo();
 		//必传
-		input.setUserName("78989");
-		input.setIdCard("340826199209094899");
+		input.setUserName("钟馗王");
+		input.setIdCard("340826199209094123");
 		input.setBankAccountId("ICBC");
-		input.setBankCardId("6222021001098942458");
-		input.setBankPhone("17682307299");
+		input.setBankCardId("6222021001098942123");
+		input.setBankPhone("17682307123");
 		
 		String result = HttpUtil.doService("http://127.0.0.1:10001/", "operationLoanUser", "accessKey", HttpUtil.ContentType.JSON, input);
 		
