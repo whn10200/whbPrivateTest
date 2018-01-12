@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import com.whb.demo.Student;
+import com.whb.model.Student;
 
 public class ThreadPoolExecutorTest {
 

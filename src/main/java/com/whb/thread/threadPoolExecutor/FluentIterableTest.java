@@ -1,4 +1,4 @@
-package com.whb.demo;
+package com.whb.thread.threadPoolExecutor;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.whb.model.Student;
 
 public class FluentIterableTest {
 	

@@ -1,4 +1,4 @@
-package com.whb.test;
+package com.whb.java8;
 
 public class JavaVsersion8Impl implements JavaVsersion8{
 

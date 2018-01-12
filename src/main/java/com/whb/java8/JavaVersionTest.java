@@ -1,4 +1,4 @@
-package com.whb.test;
+package com.whb.java8;
 
 public class JavaVersionTest {
 	

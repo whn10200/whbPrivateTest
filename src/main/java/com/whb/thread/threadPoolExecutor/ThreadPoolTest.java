@@ -1,4 +1,4 @@
-package com.whb.demo;
+package com.whb.thread.threadPoolExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.whb.model.Student;
 
 public class ThreadPoolTest {
 

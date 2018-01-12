@@ -3,7 +3,7 @@ package com.whb.rmi;
 import java.rmi.Naming;
 import java.util.List;
 
-import com.whb.demo.Student;
+import com.whb.model.Student;
 
 public class RemoteClient {
 

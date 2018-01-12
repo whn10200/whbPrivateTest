@@ -1,4 +1,4 @@
-package com.whb.test;
+package com.whb.thread.threadPoolExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import com.whb.demo.Student;
+
+import com.whb.model.Student;
 public class FutureTest {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		List<Future<Student>> results = new ArrayList<Future<Student>>();

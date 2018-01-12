@@ -1,4 +1,4 @@
-package com.whb.demo;
+package com.whb.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

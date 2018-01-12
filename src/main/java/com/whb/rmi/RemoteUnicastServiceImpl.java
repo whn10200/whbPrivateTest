@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.whb.demo.Student;
+import com.whb.model.Student;
 
 /**
  * RMI 服务接口RemoteServiceInterface的具体实现<br>

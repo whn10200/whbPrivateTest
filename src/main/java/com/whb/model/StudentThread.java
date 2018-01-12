@@ -1,4 +1,4 @@
-package com.whb.demo;
+package com.whb.model;
 
 public class StudentThread implements Runnable {
 	

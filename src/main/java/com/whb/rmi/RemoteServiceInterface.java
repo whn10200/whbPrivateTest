@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import com.whb.demo.Student;
+import com.whb.model.Student;
 
 public interface RemoteServiceInterface extends Remote {
 
