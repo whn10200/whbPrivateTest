@@ -25,10 +25,10 @@ public class TuodaoTest {
 	@Test
 	public void testFindLoanUser() throws Exception {
 		Demo input = new Demo();
-		input.setIdCard("340826199209094899");
-		input.setPhone("17682307299"); 
+//		input.setIdCard("340826199209094899");
+		input.setPhone("13984512678"); 
 		
-		String result = HttpUtil.doService("http://127.0.0.1:10001/", "queryLoanUser", "accessKey", HttpUtil.ContentType.JSON, input);
+		String result = HttpUtil.doService("http://114.55.30.32:10003/", "queryLoanUser", "accessKey", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 	}
@@ -50,7 +50,7 @@ public class TuodaoTest {
 		input.setBankCardId("6222021001098942123");
 		input.setBankPhone("17682307123");
 		
-		String result = HttpUtil.doService("http://127.0.0.1:10001/", "operationLoanUser", "accessKey", HttpUtil.ContentType.JSON, input);
+		String result = HttpUtil.doService("http://114.55.30.32:10003/", "operationLoanUser", "accessKey", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 		

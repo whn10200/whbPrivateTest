@@ -6,9 +6,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class SocketClientRequestThread implements Runnable {
 
 	/**
