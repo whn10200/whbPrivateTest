@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @date 2017年12月29日 上午9:40:31 
  * @Description: 添加借款用户对象
  */
-public class Demo implements Serializable {
+public class Demo extends BasePojo implements Serializable {
 
     /**@Fields serialVersionUID 
 	 */

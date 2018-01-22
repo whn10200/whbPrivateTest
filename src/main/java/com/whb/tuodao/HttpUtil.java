@@ -1,6 +1,7 @@
 package com.whb.tuodao;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -34,10 +35,27 @@ public class HttpUtil {
     private static final  RestTemplate httpRestTemplate = new RestTemplate();
     
     protected static HttpHeaders headers = new HttpHeaders();
+    
+    private static final String ACCESS_ID = "tdFinaceClientAccessId";
+    private static final String ACCESS_KEY = "tdFinaceClientAccessKey";
+    private static final String REQUEST_TYPE = "2";
+    private static final String USER_NO = "TDFINACE_ACCESS_API";
 
-	public static <T> String doService(String url, String action,String accessKey, ContentType type, T content) throws Exception{
+	@SuppressWarnings("unchecked")
+	public static <T> String doService(String url, String action, ContentType type, T content) throws Exception{
 		String requestUrl = url + "/" +action + "." + type.name().toLowerCase();
-        // 转换成指定类型
+		
+		Class<BasePojo> parentClass = BasePojo.class;
+		Class<T> childClass = (Class<T>) content.getClass();
+		if(parentClass.isAssignableFrom(childClass)){
+			//只有继承BasePojo类的子类才允许进行设置请求参数
+			setFieldValue(content, "accessId", ACCESS_ID);
+			setFieldValue(content, "requestType", REQUEST_TYPE);
+			setFieldValue(content, "userNo", USER_NO);
+			setFieldValue(content, "ip", "");
+		} 
+		
+		// 转换成指定类型
 		String requestBody = content(action, content, type);
 		headers.set("format", type.name().toLowerCase());
 
@@ -46,7 +64,7 @@ public class HttpUtil {
 
             String md5Sign = Hashing.md5().hashString(requestBody, Charsets.UTF_8).toString().toLowerCase();
 
-			String hmacSha1Sign = HmacSha1UtilSignToString(md5Sign, accessKey, Charsets.UTF_8.name());
+			String hmacSha1Sign = HmacSha1UtilSignToString(md5Sign, ACCESS_KEY, Charsets.UTF_8.name());
 
             headers.set("sign", URLEncoder.encode(hmacSha1Sign, Charsets.UTF_8.name()));
 
@@ -99,6 +117,49 @@ public class HttpUtil {
         }
 
     }
+	
+	/** 
+     * 直接设置对象属性值, 忽略 private/protected 修饰符, 也不经过 setter 
+     * @param object : 子类对象 
+     * @param fieldName : 父类中的属性名 
+     * @param value : 将要设置的值 
+     */  
+	public static void setFieldValue(Object object, String fieldName, Object value) {
+
+		// 根据 对象和属性名通过反射 调用上面的方法获取 Field对象
+		Field field = getDeclaredField(object, fieldName);
+		// 抑制Java对其的检查
+		field.setAccessible(true);
+		try {
+			// 将 object 中 field 所代表的值 设置为 value
+			field.set(object, value);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/** 
+     * 循环向上转型, 获取对象的 DeclaredField 
+     * @param object : 子类对象 
+     * @param fieldName : 父类中的属性名 
+     * @return 父类中的属性对象 
+     */
+	public static Field getDeclaredField(Object object, String fieldName) {
+		Field field = null;
+		Class<?> clazz = object.getClass();
+		for (; clazz != Object.class; clazz = clazz.getSuperclass()) {
+			try {
+				field = clazz.getDeclaredField(fieldName);
+				return field;
+			} catch (Exception e) {
+				// 这里甚么都不要做！并且这里的异常必须这样写，不能抛出去。
+				// 如果这里的异常打印或者往外抛，则就不会执行clazz = clazz.getSuperclass(),最后就不会进入到父类中了
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * HmacSHA1签名工具类,根据key和字符集算出data的hash值
