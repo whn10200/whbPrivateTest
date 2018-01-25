@@ -1,4 +1,4 @@
-package com.whb.aop;
+package com.whb.aop.jdk;
 
 public class BusinessInterfaceImpl implements BusinessInterface {
 
