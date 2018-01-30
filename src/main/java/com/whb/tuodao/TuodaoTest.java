@@ -26,9 +26,9 @@ public class TuodaoTest {
 	public void testFindLoanUser() throws Exception {
 		Demo input = new Demo();
 //		input.setIdCard("340826199209094899");
-		input.setPhone("13984512678"); 
+		input.setPhone("13877778888"); 
 		
-		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
+		String result = HttpUtil.doService("http://tangjianying.f3322.net:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 	}
