@@ -12,12 +12,12 @@ public class SystemInfo {
 			System.out.println(string+"====="+envs.get(string));
 		}*/
 		
-		/*try {
+		try {
 			testBoolean();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		if (true && 1 == 1 && 2 == 2 && BigDecimal.ZERO.compareTo(new BigDecimal("0")) == 0) {
 			System.out.println(22);
@@ -29,7 +29,7 @@ public class SystemInfo {
 	private static Boolean testBoolean() throws InterruptedException {
 		try {
 			System.out.println(123);
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			return true;
 		} finally {
 			System.out.println(9999);

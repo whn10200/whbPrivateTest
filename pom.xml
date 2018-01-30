@@ -23,6 +23,8 @@
 		<ant.version>1.9.7</ant.version>
 		<guava.version>19.0</guava.version>
 		<joda-time.version>2.9.4</joda-time.version>
+		<plugin.version>1.0.0</plugin.version>
+		<pagehelper.version>4.1.6</pagehelper.version>
 	</properties>
 
 	<dependencies>
@@ -53,6 +55,45 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- spring boot mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+
+		<!-- 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave-mysql</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
+		<!-- JDBC连接池组件 -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<!-- 版本号可以不用指定，Spring Boot会选用合适的版本 -->
+		</dependency>
+
+		<!-- mysql数据库连接组件 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tuodao.hechuan.mybatis.plugin</groupId>
+			<artifactId>SerializablePlugin</artifactId>
+			<version>${plugin.version}</version>
 		</dependency>
 
 		<!-- logstash logback 支持 -->
@@ -215,6 +256,11 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
 
