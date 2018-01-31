@@ -1,4 +1,4 @@
-package com.whb.io;
+package com.whb.io.socket;
 
 import java.io.IOException;
 import java.io.InputStream;

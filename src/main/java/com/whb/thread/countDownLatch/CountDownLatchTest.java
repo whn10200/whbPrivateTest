@@ -2,7 +2,7 @@ package com.whb.thread.countDownLatch;
 
 import java.util.concurrent.CountDownLatch;
 
-import com.whb.io.SocketClientRequestThread;
+import com.whb.io.socket.SocketClientRequestThread;
 
 public class CountDownLatchTest {
 

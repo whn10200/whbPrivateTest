@@ -1,4 +1,4 @@
-package com.whb.io;
+package com.whb.io.socket;
 
 import java.io.InputStream;
 import java.io.OutputStream;
