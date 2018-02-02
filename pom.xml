@@ -19,6 +19,7 @@
 		<logstash-logback.version>4.7</logstash-logback.version>
 		<fastjson.version>1.2.16</fastjson.version>
 		<commons-lang3.version>3.0</commons-lang3.version>
+		<commons-io.version>2.4</commons-io.version>
 		<aliyun-sdk-oss.version>2.2.0</aliyun-sdk-oss.version>
 		<ant.version>1.9.7</ant.version>
 		<guava.version>19.0</guava.version>
@@ -70,12 +71,12 @@
 			<artifactId>pagehelper</artifactId>
 			<version>${pagehelper.version}</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-mysql</artifactId>
-            <version>4.1.0</version>
-        </dependency>
+			<groupId>io.zipkin.brave</groupId>
+			<artifactId>brave-mysql</artifactId>
+			<version>4.1.0</version>
+		</dependency>
 
 		<!-- JDBC连接池组件 -->
 		<dependency>
@@ -150,6 +151,18 @@
 			<version>${commons-lang3.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.55</version>
+        </dependency>
+
 
 		<dependency>
 			<groupId>org.apache.ant</groupId>
@@ -217,6 +230,12 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.5.0</version>
 		</dependency>
 
 		<!-- redis pool -->

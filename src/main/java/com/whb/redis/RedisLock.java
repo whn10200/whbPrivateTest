@@ -9,7 +9,11 @@ import java.lang.annotation.Target;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * @author whb
+ * @date 2018年2月2日 下午4:01:28 
+ * @Description: 弊端：如果长时间获取不到，就会获取锁失败，相当于没加锁！，建议使用redession
+ */
 public abstract class RedisLock {
 	
 	WhbRedisTempalte redis;

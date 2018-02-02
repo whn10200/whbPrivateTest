@@ -42,6 +42,40 @@ spring:
   aop:
     auto: true
     proxy-target-class: true
+    
+##redis分布式锁
+dislock:
+  redisson:
+    startup: true
+    clusterServersConfig:
+      idleConnectionTimeout: 10000
+      pingTimeout: 1000
+      connectTimeout: 10000
+      timeout: 3000
+      retryAttempts: 3
+      retryInterval: 1500
+      reconnectionTimeout: 3000
+      failedAttempts: 3
+      #password: null
+      subscriptionsPerConnection: 5
+      clientName: null
+      #loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+      slaveSubscriptionConnectionMinimumIdleSize: 1
+      slaveSubscriptionConnectionPoolSize: 50
+      slaveConnectionMinimumIdleSize: 10
+      slaveConnectionPoolSize: 64
+      masterConnectionMinimumIdleSize: 10
+      masterConnectionPoolSize: 64
+      readMode: "SLAVE"
+      nodeAddresses:
+      - "redis://114.55.30.32:34587"
+      - "redis://114.55.30.32:34588"
+      - "redis://114.55.30.32:34589"
+      - "redis://114.55.30.32:34590"
+      - "redis://114.55.30.32:34591"
+      - "redis://114.55.30.32:34592"
+      scanInterval: 1000    
+ 
       
 
 ##数据库

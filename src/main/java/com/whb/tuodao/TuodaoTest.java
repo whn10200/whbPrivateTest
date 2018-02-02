@@ -27,8 +27,8 @@ public class TuodaoTest {
 		Demo input = new Demo();
 //		input.setIdCard("340826199209094899");
 		input.setPhone("13877778888"); 
-		
-		String result = HttpUtil.doService("http://tangjianying.f3322.net:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
+//		http://tangjianying.f3322.net:10001/
+		String result = HttpUtil.doService("http://114.55.30.32:10003/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 	}
