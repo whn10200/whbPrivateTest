@@ -11,11 +11,11 @@
 
 	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
-	</parent>
-
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.7.RELEASE</version>
+        <relativePath/>
+    </parent>
 
 
 	<modules>
@@ -99,11 +99,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.tuodao.hechuan.mybatis.plugin</groupId>
 			<artifactId>SerializablePlugin</artifactId>
 			<version>${plugin.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- logstash logback 支持 -->
 		<dependency>
