@@ -12,10 +12,6 @@ import java.util.TreeMap;
 
 /**
  * @description: Map银行相关解析操作工具类
- * @author: 王艳兵
- * @date: 2017/8/28
- * @time: 16:28
- * @copyright: 拓道金服 Copyright (c) 2017
  */
 public class BankMapUtil {
 

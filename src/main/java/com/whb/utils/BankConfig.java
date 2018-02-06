@@ -6,10 +6,6 @@ import sun.misc.BASE64Decoder;
 
 /**
  * @description: 银行接口相关配置信息
- * @author: 王艳兵
- * @date: 2017/8/28
- * @time: 14:26
- * @copyright: 拓道金服 Copyright (c) 2017
  */
 public class BankConfig {
 

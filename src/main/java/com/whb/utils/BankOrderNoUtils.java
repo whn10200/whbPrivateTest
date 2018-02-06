@@ -3,8 +3,6 @@ package com.whb.utils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @Author wuchengjie
- * @Date 2017/12/4 0004 15:58
  * @Introduction 银行存管订单号加一
  */
 public class BankOrderNoUtils {
