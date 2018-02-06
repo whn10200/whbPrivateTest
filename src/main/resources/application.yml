@@ -8,10 +8,10 @@ logging:
         com.whb.io: debug
 spring: 
   dubbo:
-    scan: com.whb.aop
+    scan: com.whb.dubbo
     application:
       name: whb-server
-      owner: tuodao
+      owner: whb
     registry:
       address: zookeeper://114.55.30.32:2181
       group: whb

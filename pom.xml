@@ -34,6 +34,8 @@
 		<joda-time.version>2.9.4</joda-time.version>
 		<plugin.version>1.0.0</plugin.version>
 		<pagehelper.version>4.1.6</pagehelper.version>
+		<dubbo.version>2.5.3</dubbo.version>
+		<zk.version>0.7</zk.version>
 	</properties>
 
 	<dependencies>
@@ -124,6 +126,45 @@
 			<artifactId>spring-jms</artifactId>
 		</dependency>
 		<!-- activeMQ 相关依赖结束 -->
+		
+		
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>${dubbo.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>org.jboss.netty</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- zkclient -->
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>${zk.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 
 		<dependency>
