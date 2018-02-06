@@ -34,13 +34,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * http 请求工具类
- * 
- * @author hechuan
- *
- * @created 2017年3月25日
- *
- * @since 1.0.0
+ * @author whb
+ * @date 2018年2月6日 下午2:06:15 
+ * @Description: http 请求工具类
  */
 public class HttpClientUtils {
 

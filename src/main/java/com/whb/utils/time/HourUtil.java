@@ -1,4 +1,4 @@
-package com.whb.utils;
+package com.whb.utils.time;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

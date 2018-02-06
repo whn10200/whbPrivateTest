@@ -1,4 +1,4 @@
-package com.whb.utils;
+package com.whb.utils.time;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -12,11 +12,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
- * @description: 日期工具类
- * @author: 王艳兵
- * @date: 2017/9/12
- * @time: 19:44
- * @copyright: 拓道金服 Copyright (c) 2017
+ * @author whb
+ * @date 2018年2月6日 下午2:30:56 
+ * @Description: 日期工具类
  */
 public class DateUtil extends DateUtils {
 

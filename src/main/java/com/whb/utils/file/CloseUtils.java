@@ -1,4 +1,4 @@
-package com.whb.utils;
+package com.whb.utils.file;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -7,13 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 关闭流
- * 
- * @author hechuan
- *
- * @created 2017年3月25日
- *
- * @since 1.0.0
+ * @author whb
+ * @date 2018年2月6日 下午2:32:21 
+ * @Description: 关闭流
  */
 public class CloseUtils {
 

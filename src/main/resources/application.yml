@@ -43,7 +43,7 @@ spring:
     auto: true
     proxy-target-class: true
     
-##redis分布式锁
+##redisson分布式锁
 dislock:
   redisson:
     startup: true
