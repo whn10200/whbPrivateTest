@@ -9,15 +9,12 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import com.whb.model.Student;
 
 /**
- * 利用反射，将实体转成Map
- * 
- * @author hc
- *
- * @created on 2017年6月15日
- * 
- * @version 1.0.0
+ * @author whb
+ * @date 2018年2月6日 下午3:52:03 
+ * @Description: 利用反射，将实体转成Map
  */
 public class ReflectionUtils {
 	
@@ -49,5 +46,12 @@ public class ReflectionUtils {
 			}
 		}
 		return returnMap;
+	}
+	
+	public static void main(String[] args) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
+		
+		Map<String, Object> returnMap = ReflectionUtils.convertBean(new Student());
+		System.out.println(returnMap.toString());
+		
 	}
 }
