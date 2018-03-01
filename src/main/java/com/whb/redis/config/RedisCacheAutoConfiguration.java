@@ -201,7 +201,7 @@ public class RedisCacheAutoConfiguration extends CachingConfigurerSupport {
 	 * @return
 	 */
 	@Bean(name = "whbRedisTempalte")
-	@Qualifier(value = "cloudRedisTemplate")
+	@Qualifier(value = "springRedisTemplate")
 	public WhbRedisTempalte redisUtilsTemplate(StringRedisTemplate cloudRedisTemplate) {
 		WhbRedisTempalte redisTempalte  =new  WhbRedisTempalte(cloudRedisTemplate);
 		return redisTempalte;
@@ -213,6 +213,12 @@ public class RedisCacheAutoConfiguration extends CachingConfigurerSupport {
 		return super.cacheManager();
 	}
 	
+	/**
+	 * 使用缓存，外面是使用ehcaceh，内部是使用redis进行实现保存缓存内容的
+	 * @param cloudRedisTemplate
+	 * @return
+	 * @return CacheManager
+	 */
 	@SuppressWarnings("rawtypes")
 	@Bean
 	@Primary

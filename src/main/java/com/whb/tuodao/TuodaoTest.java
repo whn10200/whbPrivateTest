@@ -28,7 +28,7 @@ public class TuodaoTest {
 //		input.setIdCard("340826199209094899");
 		input.setPhone("13877778888"); 
 //		http://tangjianying.f3322.net:10001/
-		String result = HttpUtil.doService("http://114.55.30.32:10003/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
+		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 	}
@@ -50,8 +50,8 @@ public class TuodaoTest {
 		input.setBankCardId("6222021001098942123");
 		input.setBankPhone("17682307123");
 		
-		String result = HttpUtil.doService("http://114.55.30.32:10003/", "finace/operationLoanUser", HttpUtil.ContentType.JSON, input);
-		
+		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/operationLoanUser", HttpUtil.ContentType.JSON, input);
+		//http://114.55.30.32:10003/
 		System.out.println(result);
 		
 		//返回{"response":{"info":{"code":100000,"msg":"成功"},"content":"success"}}
