@@ -47,6 +47,8 @@ public class Demo extends BasePojo implements Serializable {
      * 操作类型1：新增，2修改
      */
     private Integer operationType;
+    
+    private Integer repayStatus;
 
     public String getUserName() {
         return userName;
@@ -102,6 +104,14 @@ public class Demo extends BasePojo implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getRepayStatus() {
+		return repayStatus;
+	}
+
+	public void setRepayStatus(Integer repayStatus) {
+		this.repayStatus = repayStatus;
 	}
 
 }

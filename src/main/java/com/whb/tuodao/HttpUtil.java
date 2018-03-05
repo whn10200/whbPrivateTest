@@ -59,7 +59,9 @@ public class HttpUtil {
 		String requestBody = content(action, content, type);
 		headers.set("format", type.name().toLowerCase());
 
+		//requestBody="{\"request\":{\"common\":{\"action\":\"/finace/getRepayList\",\"reqtime\":\"20180305115733\"},\"content\":{\"accessId\":\"tdFinaceClientAccessId\",\"requestType\":\"2\",\"userNo\":\"TDFINACE_ACCESS_API\",\"archiveId\":null,\"repayPlanId\":null,\"amount\":null,\"type\":null,\"idCard\":\"421381199309128112\",\"repayStatus\":\"1\"}}}";
 		log.info(requestBody);
+		
 		try{
 
             String md5Sign = Hashing.md5().hashString(requestBody, Charsets.UTF_8).toString().toLowerCase();

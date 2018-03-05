@@ -56,5 +56,19 @@ public class TuodaoTest {
 		
 		//返回{"response":{"info":{"code":100000,"msg":"成功"},"content":"success"}}
 	}
+	
+	@Test
+	public void testGetRepayList() throws Exception {
+		
+		Demo input = new Demo();
+		//必传
+		input.setIdCard("421381199309128112");
+		input.setRepayStatus(1);
+		String result = HttpUtil.doService("http://120.55.193.48:10003/", "finace/getRepayList", HttpUtil.ContentType.JSON, input);
+		//http://114.55.30.32:10003/
+		System.out.println(result);
+		
+		//返回{"response":{"info":{"code":100000,"msg":"成功"},"content":"success"}}
+	}
 
 }
