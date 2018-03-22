@@ -1,12 +1,12 @@
-package com.whb.test;
+package com.whb.jdk;
 
 public class StaticTest {
 	public static void main(String args[]) {
 		//staticFunction();
-		System.out.println("adc");
+		User user = new User();
 	}
 
-	static StaticTest st = new StaticTest();
+	/*static StaticTest st = new StaticTest();
 	
 	
 	static {
@@ -25,5 +25,5 @@ public class StaticTest {
 		System.out.println("1");
 	}
 	int a = 100;
-	static int b = 112;
+	static int b = 112;*/
 }

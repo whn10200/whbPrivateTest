@@ -8,6 +8,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import com.whb.model.Student;
+
 public class LockTest {
 
 	public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class LockTest {
 			System.out.println(789);
 //			lock.unlock();
 		}*/
-		
+		new Student().notifyAll();
 		Map<String,String> map = new ConcurrentHashMap();
 		
 		Map<String,String> mapTable = new Hashtable<String, String>();
