@@ -36,10 +36,10 @@ public class HttpUtil {
     
     protected static HttpHeaders headers = new HttpHeaders();
     
-    private static final String ACCESS_ID = "tdFinaceClientAccessId";
-    private static final String ACCESS_KEY = "tdFinaceClientAccessKey";
+    private static final String ACCESS_ID = "ss";
+    private static final String ACCESS_KEY = "ss";
     private static final String REQUEST_TYPE = "2";
-    private static final String USER_NO = "TDFINACE_ACCESS_API";
+    private static final String USER_NO = "ss";
 
 	@SuppressWarnings("unchecked")
 	public static <T> String doService(String url, String action, ContentType type, T content) throws Exception{
