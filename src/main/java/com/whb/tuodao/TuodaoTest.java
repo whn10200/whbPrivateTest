@@ -28,7 +28,8 @@ public class TuodaoTest {
 //		input.setIdCard("340826199209094899");
 		input.setPhone("13877778888"); 
 //		http://tangjianying.f3322.net:10001/
-		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
+//		http://120.27.163.111:10001//finace/getRepayList.json
+		String result = HttpUtil.doService("http://120.27.163.111:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
 		
 		System.out.println(result);
 	}
