@@ -52,6 +52,20 @@ public class Student implements Serializable{
 	public String toString() {
 		return "Student [age=" + age + ", name=" + name + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Student tt = (Student) obj;
+		if(this.name.equals(tt.getName())){
+			return true;
+		}
+		return super.equals(obj);
+	}
 	
 	
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 
 import com.whb.model.Student;
 
@@ -19,10 +20,14 @@ public class SpringUtilsTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		source = new Student(11, "王五");
+		
+		
 	}
 	
 	@Test
 	public void listTest() {
+		
+		System.out.println("123".equals(null));
 		ArrayList<String> list = new ArrayList<String>();
 		/*for (int i = 0; i < 1000000; i++) {
 			list.add(i+"");
@@ -81,6 +86,8 @@ public class SpringUtilsTest {
 		System.out.println("source---->"+source.toString());
 		System.out.println("target---->"+target.toString());*/
 	}
+	
+	
 
 	public Boolean getFlag() {
 		return flag;
@@ -88,6 +95,32 @@ public class SpringUtilsTest {
 
 	public void setFlag(Boolean flag) {
 		this.flag = flag;
+	}
+	
+	@Test
+	public void hashCodeAndEquilsTest() {
+		Student tt = new Student(2,"12");
+		System.out.println(tt.hashCode());
+		
+		System.out.println("12".hashCode());
+		
+		Student ss = new Student(2,"23");
+		System.out.println(ss.hashCode());
+		
+		System.out.println(tt.equals(ss));
+		
+		System.out.println("123".equals("456"));
+	}
+	
+	@Test
+	public void studentTest() {
+		Student tt = new Student(2,"12");
+		Student ss = new Student(3);
+		BeanUtils.copyProperties(ss, tt);
+		
+		System.out.println(tt.toString());
+		
+		
 	}
 
 }

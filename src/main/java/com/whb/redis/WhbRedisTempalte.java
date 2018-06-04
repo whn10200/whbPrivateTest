@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -18,6 +19,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whb.utils.time.DateUtil;
 
 /**
  * @author whb
@@ -689,5 +691,118 @@ public class WhbRedisTempalte {
 				return connection.setNX(key.getBytes(),lockValue.getBytes());
 			}
 		});
+	}
+	
+	/**
+	 * 原子性操作
+	 * @param key
+	 * @param lockValue
+	 * @return
+	 */
+	public String getSet(String key, String lockValue) {
+		return client.execute(new RedisCallback<String>() {
+			public String doInRedis(RedisConnection connection) {
+				byte[] bytes = connection.getSet(key.getBytes(),lockValue.getBytes());
+				if(bytes==null){
+					return null;
+				}
+				return new String(bytes);
+			}
+		});
+	}
+	
+	/**
+	 * 获取分布式锁，获取不成功会一直尝试获取
+	 * @param redisKey
+	 * @return
+	 */
+	public boolean getDistributedLock(String redisKey){
+	    try {
+	        String currentMill= System.currentTimeMillis() + "";
+	        while (true){
+	            Boolean getLock = setNx(redisKey, currentMill);
+	            if(getLock){
+	                logger.debug(Thread.currentThread().getName() + "-成功获取分布式锁【"+ redisKey +"】");
+	                return true;
+	            }else {
+	                logger.debug(Thread.currentThread().getName() + "-获取分布式锁【"+ redisKey +"】失败，将尝试重新获取锁");
+	                while (true){
+	                    String currentLockValue = this.get(redisKey);
+	                    long currentLockTime,oldLockTime;
+	                    if(StringUtils.isNotBlank(currentLockValue)){
+	                        currentLockTime = Long.parseLong(currentLockValue);
+	                        if(System.currentTimeMillis() - currentLockTime > 1000){
+	                            //锁过期
+	                            logger.debug(Thread.currentThread().getName() + "-当前的分布式锁【"+ redisKey +"】已经超时，将尝试强制获取锁");
+	                            String oldLockValue = this.getSet(redisKey, System.currentTimeMillis() + "");
+	                            if(StringUtils.isNotBlank(oldLockValue)){
+	                                oldLockTime = Long.parseLong(oldLockValue);
+	                                if(currentLockTime == oldLockTime){
+	                                    //获得锁
+	                                    logger.debug(Thread.currentThread().getName() + "-成功获取分布式锁【"+ redisKey +"】");
+	                                    return true;
+	                                }else {
+	                                    //在这之前已经有其他客户端获取锁，等待重试
+	                                    logger.debug(Thread.currentThread().getName() + "-已经有其他客户端抢先获取到分布式锁【"+ redisKey +"】，将稍后重试获取锁");
+	                                    try {
+	                                        Thread.sleep(50);
+	                                    } catch (InterruptedException e) {
+	                                        logger.warn(e.getMessage(),e);
+	                                    }
+	                                }
+	                            }else {
+	                                //锁被释放，可以获得锁
+	                                logger.debug(Thread.currentThread().getName() + "-当前分布式锁【"+ redisKey +"】已经被释放，将尝试重新获取锁");
+	                                break;
+	                            }
+	                        }else {
+	                            //锁正在有效期被其他客户端使用，等待重试
+	                            logger.debug(Thread.currentThread().getName() + "-分布式锁【"+ redisKey +"】正在被其他客户端使用，将稍后重试获取锁");
+	                            try {
+	                                Thread.sleep(50);
+	                            } catch (InterruptedException e) {
+	                                logger.warn(e.getMessage(),e);
+	                            }
+	                        }
+	                    }else {
+	                        //锁被释放，可以获得锁
+	                        logger.debug(Thread.currentThread().getName() + "-当前分布式锁【"+ redisKey +"】已经被释放，将尝试重新获取锁");
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	    }catch (Exception ex){
+	        logger.error(ex.getMessage(),ex);
+	        return true;
+	    }
+	}
+
+	/**
+	 * 尝试获取分布式锁，获取失败则直接返回
+	 * @param redisKey
+	 * @return
+	 */
+	public boolean tryGetDistributedLock(String redisKey){
+	    String currentMill= System.currentTimeMillis() + "";
+	    Boolean getLock =setNx(redisKey, currentMill);
+	    if(getLock){
+	        logger.debug(Thread.currentThread().getName() + "-成功获取分布式锁【"+ redisKey +"】");
+	        return true;
+	    }
+	    logger.debug(Thread.currentThread().getName() + "-尝试获取分布式锁【"+ redisKey +"】失败");
+	    return false;
+	}  
+
+	/**
+	 * 释放分布式锁
+	 * 可能会出现释放不成功的情况，不需处理，只需等待自动超时即可
+	 * @param redisKey
+	 * @return
+	 */
+	public boolean releaseDistributedLock(String redisKey){
+	    del(redisKey);
+	    logger.debug(Thread.currentThread().getName() + "-成功释放分布式锁【"+ redisKey +"】");
+	    return true;
 	}
 }
