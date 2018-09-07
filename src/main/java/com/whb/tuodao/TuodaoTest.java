@@ -26,11 +26,11 @@ public class TuodaoTest {
 	public void testFindLoanUser() throws Exception {
 		Demo input = new Demo();
 //		input.setIdCard("340826199209094899");
-		input.setPhone("13877778888"); 
+		input.setPhone("13722979750"); 
 //		http://tangjianying.f3322.net:10001/
 //		http://120.27.163.111:10001//finace/getRepayList.json
 		String result = HttpUtil.doService("http://120.27.163.111:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
-		
+//		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/queryLoanUser", HttpUtil.ContentType.JSON, input);
 		System.out.println(result);
 	}
 	
@@ -45,11 +45,11 @@ public class TuodaoTest {
 		
 		Demo input = new Demo();
 		//必传
-		input.setUserName("钟馗王");
-		input.setIdCard("340826199209094123");
-		input.setBankAccountId("ICBC");
-		input.setBankCardId("6222021001098942123");
-		input.setBankPhone("17682307123");
+		input.setUserName("张小凡2");
+		input.setIdCard("340823199412316819");
+		input.setBankAccountId("CCB");
+		input.setBankCardId("6236683820000245703");
+		input.setBankPhone("17682307202");
 		
 		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/operationLoanUser", HttpUtil.ContentType.JSON, input);
 		//http://114.55.30.32:10003/
@@ -66,6 +66,22 @@ public class TuodaoTest {
 		input.setIdCard("421381199309128112");
 		input.setRepayStatus(1);
 		String result = HttpUtil.doService("http://120.55.193.48:10003/", "finace/getRepayList", HttpUtil.ContentType.JSON, input);
+		//http://114.55.30.32:10003/
+		System.out.println(result);
+		
+		//返回{"response":{"info":{"code":100000,"msg":"成功"},"content":"success"}}
+	}
+	
+	@Test
+	public void testUpdatePrivatePhone() throws Exception {
+		
+		Demo input = new Demo();
+		//必传
+		input.setUserName("吴国华");
+		input.setIdCard("412827197503191034");
+		input.setBankPhone("17682307202");
+		
+		String result = HttpUtil.doService("http://127.0.0.1:10001/", "finace/operationPritatePhone", HttpUtil.ContentType.JSON, input);
 		//http://114.55.30.32:10003/
 		System.out.println(result);
 		

@@ -1,5 +1,6 @@
 package com.whb;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -22,6 +23,13 @@ public class SpringUtilsTest {
 		source = new Student(11, "王五");
 		
 		
+	}
+	
+	@Test
+	public void stringtest() {
+		String ss= "440000_441800";
+		System.out.println(ss.indexOf("_"));
+		System.out.println(ss.substring(ss.indexOf("_")+1));
 	}
 	
 	@Test
@@ -116,11 +124,16 @@ public class SpringUtilsTest {
 	public void studentTest() {
 		Student tt = new Student(2,"12");
 		Student ss = new Student(3);
-		BeanUtils.copyProperties(ss, tt);
+		//BeanUtils.copyProperties(ss, tt);
 		
-		System.out.println(tt.toString());
+		//System.out.println("tt"+tt.toString());
 		
-		
+		try {
+			org.apache.commons.beanutils.BeanUtils.copyProperties(tt, ss);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		System.out.println("tt:"+tt.toString());
 	}
 
 }

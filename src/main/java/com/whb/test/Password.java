@@ -9,9 +9,9 @@ public class Password {
 		List<String> phoneList = new LinkedList<String>();
 		List<String> salesmanIdList = new LinkedList<String>();
 		
-		setInfo(phoneList,salesmanIdList);
+		//setInfo(phoneList,salesmanIdList);
 
-		//phoneList.add("123456");salesmanIdList.add("007715");
+		phoneList.add("15565976661");salesmanIdList.add("007715");
 		
 		for (int i = 0; i < phoneList.size(); i++) {
 			String password = SHA256.encrypt(phoneList.get(i));
