@@ -3,6 +3,8 @@ package com.whb;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +24,8 @@ public class SpringUtilsTest {
 	public static void setUpBeforeClass() throws Exception {
 		source = new Student(11, "王五");
 		
-		
+//		AtomicReference<V>
+//		Executors
 	}
 	
 	@Test

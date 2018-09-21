@@ -1,24 +1,27 @@
 package com.whb.jdk;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
-
-import com.whb.model.Student;
-
-import net.bytebuddy.description.modifier.SynchronizationState;
 
 public class StringTest {
 
 	@Test
 	public void StringTest() {
-		BigDecimal gps_month = new BigDecimal("0.16");
+		/*BigDecimal gps_month = new BigDecimal("0.16");
 		System.out.println(gps_month);
 		
 		String[] s1 = new String[]{"a","b","c"};
-		Student tt = new Student();
+		Student tt = new Student();*/
+		
+		String ss = "aa";
+		StringBuilder sb = new StringBuilder(ss);
+		System.out.println(ss.hashCode());
+		System.out.println(sb.toString().hashCode());
+		System.out.println(ss.equals(sb.toString()));
+		
+		List<String> list = new ArrayList<>();
 		/*String[] s2 = new String[s1.length+1];
 		
 		s2[0]=s1[0];
