@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @ComponentScan("com.whb.db.interceptor")
 public class DataSourceConfiguration {
 
-    @Value("${hikari.type}")
+//    @Value("${hikari.type}")
     private Class<? extends DataSource> dataSourceType;
 
     /**
