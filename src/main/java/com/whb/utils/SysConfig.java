@@ -1,11 +1,9 @@
 package com.whb.utils;
 
 /**
- * @description: 全局系统参数
- * @author: 王艳兵
- * @date: 2017/8/28
- * @time: 14:27
- * @copyright: 拓道金服 Copyright (c) 2017
+ * @author whb
+ * @date 2018年9月28日 下午3:28:25 
+ * @Description: 全局系统参数
  */
 public class SysConfig {
 
