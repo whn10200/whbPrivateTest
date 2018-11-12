@@ -3,6 +3,7 @@ package com.whb;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -33,6 +34,9 @@ public class SpringUtilsTest {
 		String ss= "440000_441800";
 		System.out.println(ss.indexOf("_"));
 		System.out.println(ss.substring(ss.indexOf("_")+1));
+		int tt = 2;
+		tt -= 4;
+		System.out.println(tt);
 	}
 	
 	@Test
@@ -138,5 +142,29 @@ public class SpringUtilsTest {
 		} 
 		System.out.println("tt:"+tt.toString());
 	}
-
+	
+	
+	@Test
+	public void test2() {
+		List<Integer> list = new ArrayList<>();
+		
+		for (int i = 0; i < 5; i++) {
+			list.add(i);
+//			System.out.println("1111111"+i);
+//			for (int t = 0; t < 3; t++) {
+//				System.out.println("222222"+t);
+//				if(t==1){
+//					break;
+//				}
+//			}
+		}
+		list.remove(0);
+		System.out.println(list.toString());
+		System.out.println(list.get(0));
+	}
 }
+
+
+
+
+
