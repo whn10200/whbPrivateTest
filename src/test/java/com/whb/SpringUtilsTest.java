@@ -1,16 +1,19 @@
 package com.whb;
 
-import java.lang.reflect.InvocationTargetException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Locale;
+import java.util.Map.Entry;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
+import com.google.common.collect.Maps;
 import com.whb.model.Student;
 
 import scala.collection.mutable.StringBuilder;
@@ -31,12 +34,17 @@ public class SpringUtilsTest {
 	
 	@Test
 	public void stringtest() {
-		String ss= "440000_441800";
+		/*String ss= "440000_441800";
 		System.out.println(ss.indexOf("_"));
 		System.out.println(ss.substring(ss.indexOf("_")+1));
 		int tt = 2;
 		tt -= 4;
-		System.out.println(tt);
+		System.out.println(tt);*/
+		
+		HashMap<String, List<String>> noLineGpsMap = Maps.newHashMap();
+		for(Entry<String, List<String>> entry : noLineGpsMap.entrySet()){
+			System.out.println(11);
+		}
 	}
 	
 	@Test
@@ -161,6 +169,14 @@ public class SpringUtilsTest {
 		list.remove(0);
 		System.out.println(list.toString());
 		System.out.println(list.get(0));
+	}
+	
+	@Test
+	public void test3(){
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+		System.out.println(formatter.format(new Date()));
+		
+		System.out.println(new Date().getTime());
 	}
 }
 
