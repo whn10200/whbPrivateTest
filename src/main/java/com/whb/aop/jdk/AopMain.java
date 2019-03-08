@@ -12,8 +12,8 @@ import java.util.ServiceLoader;
 public class AopMain {
 
 	public static void main(String[] args) {
-		BusinessInterface realBusiness = new RealBusinessImpl();
-		BusinessInvocationHandler invocationHandler = new BusinessInvocationHandler(realBusiness);
+		
+		BusinessInvocationHandler invocationHandler = new BusinessInvocationHandler(new RealBusinessImpl());
 
 		/*
 		 * 生成一个动态代理实例。里面的三个参数需要讲解一下： 1-loader：这个newProxyInstance会有一个返回值，即代理对象。
@@ -32,7 +32,7 @@ public class AopMain {
 				Thread.currentThread().getContextClassLoader(), new Class[] { BusinessInterface.class },
 				invocationHandler);
 		// 正式调用
-//		proxyBusiness.dosomething("whb");
+		proxyBusiness.dosomething("whb");
 
 		// 以下方法也可以
 		/*

@@ -45,6 +45,9 @@ public class SpringUtilsTest {
 		for(Entry<String, List<String>> entry : noLineGpsMap.entrySet()){
 			System.out.println(11);
 		}
+		
+		System.out.println(Double.valueOf("20.3665"));
+//		System.out.println(Long.valueOf("20.36"));
 	}
 	
 	@Test

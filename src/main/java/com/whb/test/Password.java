@@ -11,7 +11,7 @@ public class Password {
 		
 		//setInfo(phoneList,salesmanIdList);
 
-		phoneList.add("15565976661");salesmanIdList.add("007715");
+		phoneList.add("009762");salesmanIdList.add("139713");
 		
 		for (int i = 0; i < phoneList.size(); i++) {
 			String password = SHA256.encrypt(phoneList.get(i));
@@ -22,6 +22,7 @@ public class Password {
 		int count = Runtime.getRuntime().availableProcessors();
 		System.out.println(count);
 		
+		System.out.println("YTVmZTlkYzBmOWY4ZjNjMGQ5MTAyOWY4NTcyYWE4ZTRjMmEyMGUyYjNjZWNiZGY4YjQ4MzA1MDEzMjFlYTY3Yw==".equals("NTlmYjU0NWQ1Y2M0ZDZmOGE2NDVmMTE2NGU3NmVkM2JiNDA3OGY4Nzc2OGIyMTY1OGE2YjY2NjFkMGNlNTE4Nw=="));
 
 	}
 	

@@ -1,6 +1,7 @@
 package com.whb.java8;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,22 @@ public class LambdaTest {
 		for (String string : lowercaseNames) {
 			System.out.println(string);
 		}
+	}
+	
+	
+	@Test
+	public void test3() {
+		List<Integer> list = Lists.newArrayList(1,2,5,3,9,4);
+		List<Integer> collect = list.stream().sorted(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1-o2;
+			}
+		}).collect(Collectors.toList());
+		
+		collect.forEach(s ->{
+			System.out.println(s);
+		});
 	}
 
 	@Test

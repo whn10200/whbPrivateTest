@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.whb.LambdaTest.Student;
 
 import lombok.Data;
 
@@ -190,7 +191,13 @@ public class LambdaTest {
 		// 不用写传入参数,传入的用Person来声明
 		Comparator<Student> byName2 = Comparator.comparing(Student::getName);
 
-		List<Student> studentList = Arrays.asList(new Student("网三", 11), new Student("彰武", 22), new Student("赵四", 33));
+		List<Student> studentList = Arrays.asList(new Student("网三", 11), new Student("彰武", 55), new Student("赵四", 33));
+		
+		List<Student> collect = studentList.stream().sorted(Comparator.comparing(Student :: getAge)).collect(Collectors.toList());
+		for (Student student : collect) {
+			System.out.println(student.getName());
+		}
+		
 
 		// 获取线程安全的Map
 		ConcurrentHashMap<String, Student> currrentMap = (ConcurrentHashMap<String, Student>) studentList.stream()
