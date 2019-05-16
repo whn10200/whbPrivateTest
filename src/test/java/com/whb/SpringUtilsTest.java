@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.redisson.connection.CRC16;
 
 import com.google.common.collect.Maps;
 import com.whb.model.Student;
@@ -180,6 +181,21 @@ public class SpringUtilsTest {
 		System.out.println(formatter.format(new Date()));
 		
 		System.out.println(new Date().getTime());
+		
+//		CRC16(‘name’)%16384 
+		System.out.println(CRC16.crc16("王".getBytes()));
+		System.out.println(CRC16.crc16("王".getBytes())%1638);
+	}
+	
+	@Test
+	public void test4(){
+		for (int i = 0; i < 5; i++) {
+			if(i==2){
+				System.out.println(222);
+				continue;
+			}
+			System.out.println(i);
+		}
 	}
 }
 
