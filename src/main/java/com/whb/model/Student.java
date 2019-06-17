@@ -53,10 +53,10 @@ public class Student implements Serializable{
 		return "Student [age=" + age + ", name=" + name + "]";
 	}
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		return this.name.hashCode();
-	}
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {

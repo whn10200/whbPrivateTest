@@ -50,6 +50,10 @@ public class LambdaTest {
 		list.stream().forEach(i -> {
 			System.out.println(i * 3);
 		});
+		
+		list.parallelStream().forEach(s ->{
+			System.out.println(s);
+		});
 
 		// 可改变对象,只在本次调用中有效, 并不会改变原有的list
 		list.stream().map((i) -> i * 3).forEach(System.out::println);

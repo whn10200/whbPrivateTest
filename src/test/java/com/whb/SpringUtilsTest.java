@@ -1,5 +1,8 @@
 package com.whb;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +17,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.redisson.connection.CRC16;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.whb.model.Student;
 
@@ -49,6 +55,10 @@ public class SpringUtilsTest {
 		
 		System.out.println(Double.valueOf("20.3665"));
 //		System.out.println(Long.valueOf("20.36"));
+		
+		Integer tt =2;
+		int ss =2;
+		System.out.println(tt==ss);
 	}
 	
 	@Test
@@ -189,14 +199,152 @@ public class SpringUtilsTest {
 	
 	@Test
 	public void test4(){
-		for (int i = 0; i < 5; i++) {
+		/*for (int i = 0; i < 5; i++) {
 			if(i==2){
 				System.out.println(222);
 				continue;
 			}
 			System.out.println(i);
-		}
+		}*/
+		
+/*		System.out.println(GetMD5Code("数组大小一般取质数"));
+		System.out.println(hashKeyForDisk("数组大小一般取质数"));
+		System.out.println(toHash("数组大小一般取质数"));
+		System.out.println("数组大小一般取质数".hashCode());*/
+		
+		
+		String ss = "{'code': '0000', 'result': {'ss':'CERT201708300057_20180109_1515464714812','ff':'CERT201708300057_20190309_1515464714816'}}";
+		String tt = JSON.parseObject(ss).getString("code");
+		System.out.println(JSON.parseObject(ss).getJSONObject("result").getString("ss"));
+			                                                                                                              
 	}
+	
+	public static String GetMD5Code(String strObj) {
+		String resultString = null;
+		try {
+			resultString = new String(strObj);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			try {
+				resultString = byteToString(md.digest(strObj.getBytes("UTF-8")));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		} catch (NoSuchAlgorithmException ex) {
+			ex.printStackTrace();
+		}
+		return resultString;
+	}
+	
+	private static String byteToString(byte[] bByte) {
+		StringBuffer sBuffer = new StringBuffer();
+		for (int i = 0; i < bByte.length; i++) {
+			sBuffer.append(byteToArrayString(bByte[i]));
+		}
+		return sBuffer.toString();
+	}
+	
+	private static String byteToArrayString(byte bByte) {
+		int iRet = bByte;
+		if (iRet < 0) {
+			iRet += 256;
+		}
+		int iD1 = iRet / 16;
+		int iD2 = iRet % 16;
+		return strDigits[iD1] + strDigits[iD2];
+	}
+	
+	private static final String[] strDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d","e", "f" };
+	
+	public static String hashKeyForDisk(String key) {
+        String cacheKey;
+        try {
+            final MessageDigest mDigest = MessageDigest.getInstance("MD5");
+            mDigest.update(key.getBytes());
+            cacheKey = bytesToHexString(mDigest.digest());
+        } catch (NoSuchAlgorithmException e) {
+            cacheKey = String.valueOf(key.hashCode());
+        }
+        return cacheKey;
+    }
+	
+	private static String bytesToHexString(byte[] bytes) {
+        // http://stackoverflow.com/questions/332079
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(0xFF & bytes[i]);
+            if (hex.length() == 1) {
+                sb.append('0');
+            }
+            sb.append(hex);
+        }
+        return sb.toString();
+    }
+	
+	// 将字符串转成hash值
+	public static int toHash(String key) {
+		int arraySize = 11113; // 数组大小一般取质数
+		int hashCode = 0;
+		for (int i = 0; i < key.length(); i++) { // 从字符串的左边开始计算
+			int letterValue = key.charAt(i) - 96;// 将获取到的字符串转换成数字，比如a的码值是97，则97-96=1
+													// 就代表a的值，同理b=2；
+			hashCode = ((hashCode << 5) + letterValue) % arraySize;// 防止编码溢出，对每步结果都进行取模运算
+		}
+		return hashCode;
+	}
+	
+
+	@Test
+	public void test5(){
+		String str1="a";
+		String str2="b";
+		String str3="ab";
+		String str4 = str1+str2;
+		String str5=new String("ab");
+		System.out.println(str5==str3);//堆内存比较字符串池
+		 //intern如果常量池有当前String的值,就返回这个值,没有就加进去,返回这个值的引用
+		System.out.println(str5.intern()==str3);//引用的是同一个字符串池里的
+		System.out.println(str5.intern()==str4);//变量相加给一个新值，所以str4引用的是个新的
+		System.out.println(str4==str3);//变量相加给一个新值，所以str4引用的是个新的
+		System.out.println(str4==str5);
+		/*重点: --两个字符串常量或者字面量相加，不会new新的字符串,其他相加则是新值,(如 String str5=str1+"b";)
+		因为在jvm翻译为二进制代码时，会自动优化，把两个值后边的结果先合并，再保存为一个常量。*/
+		System.out.println("===================");
+		//创建方式						对象个数		引用指向
+		String a="abc";					//1			常量池
+		String b=new String("abc");;	//1			堆内存 (abc则是复制的常量池里的abc)
+		String c=new String();			//1			堆内存
+		String d="a"+"bc";				//3			常量池(a一次，bc一次，和一次，d指向和)
+		String e=a+b;					//3			堆内存(新的对象)
+		String f="a";
+		String g="bc";
+		String h=f+g;
+		String k="abc";	
+		System.out.println(b==h);
+		System.out.println(a==d);
+		System.out.println(a==h.intern());
+		System.out.println(a==k);
+		System.out.println(a==f+"bc");
+		System.out.println(b==f+"bc");
+		
+	}
+	
+	@Test
+	public void test6(){
+		List<Student> list = Lists.newArrayList();
+		Student st = null;
+		for (int i = 0; i < 2; i++) {
+			st = new Student(i);
+			System.out.println(st.hashCode());
+			list.add(st);
+			st = null;
+		}
+		
+		for (Student st8 : list) {
+			System.out.println(st8.hashCode());
+		}
+		
+	}
+
 }
 
 

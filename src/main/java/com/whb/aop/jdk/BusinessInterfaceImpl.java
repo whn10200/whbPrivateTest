@@ -1,5 +1,8 @@
 package com.whb.aop.jdk;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BusinessInterfaceImpl implements BusinessInterface {
 
 	@Override
