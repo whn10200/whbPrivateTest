@@ -18,7 +18,7 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
-	
+	 
 	@RequestMapping(value="/showname",method=RequestMethod.GET)
 	public String showUserName(@RequestParam("uid") int uid,HttpServletRequest request,Model model){
 		User user = userService.getUserById(uid);
