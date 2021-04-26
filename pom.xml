@@ -28,7 +28,7 @@
 		<logstash-logback.version>4.7</logstash-logback.version>
 		<fastjson.version>1.2.16</fastjson.version>
 		<commons-lang3.version>3.0</commons-lang3.version>
-		<commons-io.version>2.4</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		<aliyun-sdk-oss.version>2.2.0</aliyun-sdk-oss.version>
 		<ant.version>1.9.7</ant.version>
 		<guava.version>19.0</guava.version>
