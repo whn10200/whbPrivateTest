@@ -35,7 +35,7 @@
 		<joda-time.version>2.9.4</joda-time.version>
 		<plugin.version>1.0.0</plugin.version>
 		<pagehelper.version>4.1.6</pagehelper.version>
-		<dubbo.version>2.5.3</dubbo.version>
+		<dubbo.version>2.6.12</dubbo.version>
 		<zk.version>0.7</zk.version>
 	</properties>
 
